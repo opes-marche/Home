@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contatti OPES Comitato Regionale Marche - sede, telefono, email, modulo di contatto.">
+  <title>Contatti – OPES Comitato Regionale Marche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 50px; align-items: start; }
+    
+    .contact-info-card {
+      background: linear-gradient(135deg, var(--primary-blue), #1a3a6e);
+      border-radius: var(--border-radius-lg); padding: 40px; color: white;
+    }
+    .contact-info-card h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 24px; margin-bottom: 8px; }
+    .contact-info-card > p { color: rgba(255,255,255,0.75); font-size: 15px; margin-bottom: 32px; }
+    
+    .contact-detail { display: flex; gap: 16px; margin-bottom: 24px; }
+    .contact-detail-icon { width: 50px; height: 50px; min-width: 50px; background: rgba(255,255,255,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--gold); }
+    .contact-detail-text strong { display: block; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: white; margin-bottom: 4px; }
+    .contact-detail-text span { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .contact-detail-text a { color: rgba(255,255,255,0.85); }
+    .contact-detail-text a:hover { color: white; }
+    
+    .contact-social { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); }
+    .contact-social h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+    .contact-social-links { display: flex; gap: 10px; }
+    .contact-social-links a { width: 44px; height: 44px; background: rgba(255,255,255,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); font-size: 18px; transition: var(--transition); }
+    .contact-social-links a:hover { background: white; color: var(--primary-blue); }
+    
+    .contact-form-card { background: var(--white); border-radius: var(--border-radius-lg); padding: 40px; box-shadow: var(--shadow-hover); }
+    .contact-form-card h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 22px; color: var(--dark-gray); margin-bottom: 8px; }
+    .contact-form-card > p { color: var(--gray); font-size: 14px; margin-bottom: 28px; }
+    
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; color: var(--dark-gray); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 2px solid #e8ecf0; border-radius: 8px; font-family: 'Open Sans', sans-serif; font-size: 14px; color: var(--dark-gray); transition: var(--transition); background: #f8fafc; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary-blue); outline: none; background: white; box-shadow: 0 0 0 3px rgba(0,48,135,0.08); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit { width: 100%; padding: 15px; background: var(--primary-blue); color: white; border: none; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer; transition: var(--transition); text-transform: uppercase; letter-spacing: 1px; }
+    .form-submit:hover { background: var(--opes-red); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,48,135,0.3); }
+    .success-msg { display: none; background: #eafaf1; border: 1px solid var(--opes-green); color: #1a5c38; padding: 16px; border-radius: 8px; margin-top: 16px; text-align: center; font-weight: 600; }
+    
+    /* Province Cards */
+    .province-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .provincia-card { background: var(--white); border-radius: var(--border-radius); padding: 20px 16px; text-align: center; box-shadow: var(--shadow); transition: var(--transition); border-top: 3px solid var(--primary-blue); }
+    .provincia-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .provincia-card i { font-size: 28px; color: var(--primary-blue); margin-bottom: 10px; display: block; }
+    .provincia-card h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: var(--dark-gray); margin-bottom: 6px; }
+    .provincia-card p { font-size: 12px; color: var(--gray); }
+    
+    /* Map placeholder */
+    .map-container { border-radius: var(--border-radius-lg); overflow: hidden; box-shadow: var(--shadow); height: 400px; background: var(--light-gray); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; border: 2px dashed var(--primary-blue); }
+    .map-container i { font-size: 48px; color: var(--primary-blue); opacity: 0.4; }
+    .map-container p { color: var(--gray); font-size: 14px; }
+    
+    @media (max-width: 992px) { .contact-layout { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .province-grid { grid-template-columns: repeat(3, 1fr); } .form-row { grid-template-columns: 1fr; } }
+    @media (max-width: 480px) { .province-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* FAQ */
+    .faq-item { background: var(--white); border-radius: var(--border-radius); margin-bottom: 12px; overflow: hidden; box-shadow: var(--shadow); }
+    .faq-question { padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 15px; color: var(--dark-gray); transition: var(--transition); }
+    .faq-question:hover { color: var(--primary-blue); background: var(--light-blue); }
+    .faq-question.open { color: var(--primary-blue); background: var(--light-blue); }
+    .faq-question i { transition: transform 0.3s; color: var(--primary-blue); }
+    .faq-question.open i { transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-answer.open { max-height: 300px; }
+    .faq-answer-inner { padding: 0 24px 18px; font-size: 14px; color: var(--gray); line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left"><a href="mailto:opes.marche@gmail.com"><i class="fas fa-envelope"></i> opes.marche@gmail.com</a></div>
+      <div class="top-bar-right"><a href="https://www.facebook.com/opesmarche" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/opesmarche" target="_blank"><i class="fab fa-instagram"></i></a></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo-area"><div class="logo-text-area"><div class="logo-title">OPES</div><div class="logo-subtitle">Comitato Reg. Marche</div></div></a>
+        <ul class="nav-menu" id="navMenu">
+          <button class="mobile-menu-close" id="closeMenu"><i class="fas fa-times"></i></button>
+          <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a href="chi-siamo.html" class="nav-link">Chi Siamo</a></li>
+          <li class="nav-item"><a href="sport.html" class="nav-link">Sport</a></li>
+          <li class="nav-item"><a href="affiliazione.html" class="nav-link">Affiliazione</a></li>
+          <li class="nav-item"><a href="eventi.html" class="nav-link">Eventi</a></li>
+          <li class="nav-item"><a href="news.html" class="nav-link">News</a></li>
+          <li class="nav-item"><a href="contatti.html" class="nav-link active">Contatti</a></li>
+          <li class="nav-item"><a href="affiliazione.html#come-affiliarsi" class="nav-link header-cta"><i class="fas fa-plus-circle"></i> Affiliati</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <h1>Contatti</h1>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Contatti</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT MAIN -->
+  <section style="background: var(--light-gray);">
+    <div class="container">
+      <div class="contact-layout">
+        <!-- Contact Info -->
+        <div class="contact-info-card fade-in">
+          <h2>Siamo qui per te</h2>
+          <p>Il Comitato Regionale OPES Marche è a tua disposizione per qualsiasi informazione su affiliazioni, tesseramenti, campionati e servizi.</p>
+          
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-detail-text">
+              <strong>Sede Legale</strong>
+              <span>Via dello Sport, 1<br>60100 Ancona (AN)</span>
+            </div>
+          </div>
+          
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-detail-text">
+              <strong>Email</strong>
+              <span><a href="mailto:opes.marche@gmail.com">opes.marche@gmail.com</a></span>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><i class="fas fa-user-tie"></i></div>
+            <div class="contact-detail-text">
+              <strong>Vincenzo Ascani – Presidente Regionale</strong>
+              <span><a href="tel:+393299627016">329 962 7016</a></span>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><i class="fas fa-user-tie"></i></div>
+            <div class="contact-detail-text">
+              <strong>Michele Gagliardi – Vice Presidente Regionale</strong>
+              <span><a href="tel:+393402114795">340 211 4795</a></span>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><i class="fas fa-id-card"></i></div>
+            <div class="contact-detail-text">
+              <strong>Alissa – Responsabile Tesseramento</strong>
+              <span><a href="tel:+393402114793">340 211 4793</a></span>
+            </div>
+          </div>
+          
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-detail-text">
+              <strong>Orari Segreteria</strong>
+              <span>Lunedì – Venerdì: 9:00 – 13:00<br>Lunedì – Giovedì: 15:00 – 18:00</span>
+            </div>
+          </div>
+          
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><i class="fas fa-globe"></i></div>
+            <div class="contact-detail-text">
+              <strong>Sito Nazionale</strong>
+              <span><a href="https://www.opesitalia.it" target="_blank">www.opesitalia.it</a></span>
+            </div>
+          </div>
+
+          <div class="contact-social">
+            <h4>Seguici sui social</h4>
+            <div class="contact-social-links">
+              <a href="https://www.facebook.com/opesmarche" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/opesmarche" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.youtube.com/@opesmarche" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.opesitalia.it" target="_blank" aria-label="Sito Nazionale"><i class="fas fa-globe"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-card fade-in">
+          <h2>Inviaci un messaggio</h2>
+          <p>Compila il modulo e ti risponderemo entro 48 ore lavorative.</p>
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nome">Nome *</label>
+                <input type="text" id="nome" placeholder="Il tuo nome" required>
+              </div>
+              <div class="form-group">
+                <label for="cognome">Cognome *</label>
+                <input type="text" id="cognome" placeholder="Il tuo cognome" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="emailC">Email *</label>
+                <input type="email" id="emailC" placeholder="tua@email.it" required>
+              </div>
+              <div class="form-group">
+                <label for="telefC">Telefono</label>
+                <input type="tel" id="telefC" placeholder="328 0000000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="argomento">Argomento *</label>
+              <select id="argomento" required>
+                <option value="">Seleziona l'argomento...</option>
+                <option>Informazioni Affiliazione</option>
+                <option>Tesseramento Atleti</option>
+                <option>Campionati e Gare</option>
+                <option>Formazione Tecnici</option>
+                <option>Informazioni Generali</option>
+                <option>Segnalazioni</option>
+                <option>Altro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="msgC">Messaggio *</label>
+              <textarea id="msgC" rows="5" placeholder="Scrivi qui il tuo messaggio..." required></textarea>
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;">
+              <input type="checkbox" id="privacyC" required style="width:auto;margin-top:4px;">
+              <label for="privacyC" style="text-transform:none;letter-spacing:0;font-weight:400;font-size:13px;color:var(--gray);">Ho letto e accetto la <a href="privacy.html" style="color:var(--primary-blue);">Privacy Policy</a>.</label>
+            </div>
+            <button type="submit" class="form-submit"><i class="fas fa-paper-plane"></i> Invia Messaggio</button>
+            <div class="success-msg" id="successMsgC">
+              <i class="fas fa-check-circle" style="font-size:24px;color:var(--opes-green);margin-bottom:8px;display:block;"></i>
+              Messaggio inviato con successo! Ti risponderemo entro 48 ore.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP PLACEHOLDER -->
+  <section style="background: var(--white);">
+    <div class="container">
+      <div class="section-header centered fade-in">
+        <div class="section-label"><i class="fas fa-map-marked-alt"></i> Dove Siamo</div>
+        <h2 class="section-title">La nostra <span>Sede</span></h2>
+      </div>
+      <div class="map-container fade-in">
+        <i class="fas fa-map-marker-alt"></i>
+        <div style="text-align:center;">
+          <p style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:var(--dark-gray);">OPES Marche – Comitato Regionale</p>
+          <p style="color:var(--gray);">Via dello Sport, 1 – 60100 Ancona (AN)</p>
+          <a href="https://maps.google.com/?q=Ancona,AN,Italy" target="_blank" class="btn-blue" style="margin-top:16px;display:inline-flex;">
+            <i class="fas fa-directions"></i> Indicazioni stradali
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVINCE -->
+  <section style="background: var(--light-gray);">
+    <div class="container">
+      <div class="section-header centered fade-in">
+        <div class="section-label"><i class="fas fa-map"></i> Territorio</div>
+        <h2 class="section-title">Presenti in <span>5 Province</span></h2>
+        <p class="section-text">OPES Marche opera su tutto il territorio regionale attraverso i referenti provinciali.</p>
+      </div>
+      <div class="province-grid">
+        <div class="provincia-card fade-in">
+          <i class="fas fa-map-marker-alt"></i>
+          <h4>Ancona</h4>
+          <p>Sede principale del Comitato Regionale</p>
+        </div>
+        <div class="provincia-card fade-in" style="border-top-color: var(--opes-red);">
+          <i class="fas fa-map-marker-alt" style="color:var(--opes-red);"></i>
+          <h4>Pesaro-Urbino</h4>
+          <p>Referente Provinciale PU</p>
+        </div>
+        <div class="provincia-card fade-in" style="border-top-color: var(--opes-green);">
+          <i class="fas fa-map-marker-alt" style="color:var(--opes-green);"></i>
+          <h4>Macerata</h4>
+          <p>Referente Provinciale MC</p>
+        </div>
+        <div class="provincia-card fade-in" style="border-top-color: #e67e22;">
+          <i class="fas fa-map-marker-alt" style="color:#e67e22;"></i>
+          <h4>Ascoli Piceno</h4>
+          <p>Referente Provinciale AP</p>
+        </div>
+        <div class="provincia-card fade-in" style="border-top-color: #8e44ad;">
+          <i class="fas fa-map-marker-alt" style="color:#8e44ad;"></i>
+          <h4>Fermo</h4>
+          <p>Referente Provinciale FM</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background: var(--white);">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header centered fade-in">
+        <div class="section-label"><i class="fas fa-question-circle"></i> FAQ</div>
+        <h2 class="section-title">Domande <span>Frequenti</span></h2>
+      </div>
+      
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Come posso affiliare la mia società ad OPES Marche?
+          <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Per affiliare la tua società puoi contattare la segreteria del Comitato Regionale Marche tramite email all'indirizzo opes.marche@gmail.com oppure compilare il modulo nella pagina <a href="affiliazione.html">Affiliazione</a>. Ti verranno forniti tutti i documenti necessari e le istruzioni per completare l'iter di affiliazione.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Quali documenti sono necessari per l'affiliazione?
+          <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Per affiliare una ASD o SSD ad OPES Marche sono generalmente richiesti: atto costitutivo e statuto societario, codice fiscale della società, elenco dei soci fondatori, documento d'identità del presidente, e il modulo di richiesta affiliazione OPES compilato. Contattaci per la documentazione aggiornata alla stagione corrente.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Come si effettua il tesseramento degli atleti?
+          <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Il tesseramento degli atleti viene effettuato dalla società sportiva affiliata tramite il portale online OPES. La società inserisce i dati degli atleti, effettua il pagamento della quota di tesseramento e riceve le tessere sportive. Per assistenza contatta la segreteria del Comitato Regionale.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Quali campionati organizza OPES Marche?
+          <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            OPES Marche organizza campionati regionali in oltre 30 discipline sportive: calcio a 5 e a 11, basket, pallavolo, nuoto, atletica, arti marziali, tennis, fitness, danza sportiva e molto altro. Le società affiliate possono iscrivere i propri atleti ai campionati regionali e, attraverso qualificazioni, ai campionati nazionali OPES.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          OPES offre corsi di formazione per allenatori?
+          <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Sì, OPES organizza periodicamente corsi di formazione per istruttori, allenatori e dirigenti sportivi. I corsi sono riconosciuti a livello nazionale e consentono di ottenere qualifiche ufficiali. Iscriviti alla newsletter o contattaci per essere informato sulle prossime date disponibili.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item fade-in">
+        <div class="faq-question">
+          Cosa include la copertura assicurativa OPES?
+          <i class="fas fa-plus"></i>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            La polizza assicurativa inclusa nel tesseramento OPES copre gli infortuni occorsi durante l'attività sportiva organizzata dall'ente e la responsabilità civile. Per i tecnici è prevista anche la copertura della responsabilità civile professionale. Per i dettagli della polizza in vigore contatta la segreteria.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="italy-bar"><span></span><span></span><span></span></div>
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div><div class="footer-logo-area"><div class="footer-logo-text">OPES</div><div class="footer-logo-sub">Comitato Regionale Marche</div></div><p class="footer-desc">Ente di Promozione Sportiva riconosciuto dal CONI. Sport per tutti nelle Marche.</p><div class="footer-social"><a href="https://www.facebook.com/opesmarche" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/opesmarche" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://www.youtube.com/@opesmarche" target="_blank"><i class="fab fa-youtube"></i></a></div></div>
+          <div class="footer-col"><h4>Link Rapidi</h4><ul class="footer-links"><li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="chi-siamo.html"><i class="fas fa-chevron-right"></i> Chi Siamo</a></li><li><a href="sport.html"><i class="fas fa-chevron-right"></i> Sport</a></li><li><a href="affiliazione.html"><i class="fas fa-chevron-right"></i> Affiliazione</a></li><li><a href="eventi.html"><i class="fas fa-chevron-right"></i> Eventi</a></li><li><a href="news.html"><i class="fas fa-chevron-right"></i> News</a></li><li><a href="contatti.html"><i class="fas fa-chevron-right"></i> Contatti</a></li></ul></div>
+          <div class="footer-col"><h4>Sport</h4><ul class="footer-links"><li><a href="sport.html#calcio"><i class="fas fa-chevron-right"></i> Calcio</a></li><li><a href="sport.html#basket"><i class="fas fa-chevron-right"></i> Basket</a></li><li><a href="sport.html#pallavolo"><i class="fas fa-chevron-right"></i> Pallavolo</a></li><li><a href="sport.html#nuoto"><i class="fas fa-chevron-right"></i> Nuoto</a></li><li><a href="sport.html#atletica"><i class="fas fa-chevron-right"></i> Atletica</a></li></ul></div>
+          <div class="footer-col"><h4>Contatti</h4><div class="footer-contact-item"><div class="icon"><i class="fas fa-map-marker-alt"></i></div><div class="text"><strong>Sede</strong>Via dello Sport, 1 – Ancona</div></div><div class="footer-contact-item"><div class="icon"><i class="fas fa-envelope"></i></div><div class="text"><strong>Email</strong>opes.marche@gmail.com</div></div><div class="footer-contact-item"><div class="icon"><i class="fas fa-globe"></i></div><div class="text"><a href="https://www.opesitalia.it" target="_blank" style="color:var(--accent-blue);">www.opesitalia.it</a></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container"><div class="footer-bottom-inner"><p>© 2025 OPES - Comitato Regionale Marche. Tutti i diritti riservati. | Ente riconosciuto CONI</p><div class="footer-bottom-links"><a href="privacy.html">Privacy Policy</a><a href="cookie.html">Cookie</a></div></div></div></div>
+  </footer>
+
+  <button id="scrollTop" aria-label="Torna su"><i class="fas fa-arrow-up"></i></button>
+  <script src="js/main.js"></script>
+  <script>
+    // Contact form
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const data = {
+        nome: document.getElementById('nome').value + ' ' + document.getElementById('cognome').value,
+        email: document.getElementById('emailC').value,
+        telefono: document.getElementById('telefC').value,
+        argomento: document.getElementById('argomento').value,
+        messaggio: document.getElementById('msgC').value,
+        data: new Date().toISOString()
+      };
+      try {
+        await fetch('tables/contatti', {
+          method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+      } catch(err) {}
+      document.getElementById('successMsgC').style.display = 'block';
+      this.reset();
+      document.getElementById('successMsgC').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', function() {
+        const isOpen = this.classList.contains('open');
+        document.querySelectorAll('.faq-question').forEach(qq => {
+          qq.classList.remove('open');
+          qq.nextElementSibling.classList.remove('open');
+        });
+        if (!isOpen) {
+          this.classList.add('open');
+          this.nextElementSibling.classList.add('open');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calendario eventi OPES Marche - campionati, tornei, gare e manifestazioni sportive nelle Marche.">
+  <title>Eventi – OPES Comitato Regionale Marche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .calendar-nav { display: flex; align-items: center; justify-content: space-between; background: var(--white); border-radius: var(--border-radius); padding: 16px 24px; margin-bottom: 32px; box-shadow: var(--shadow); }
+    .cal-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 22px; color: var(--primary-blue); }
+    .cal-btn { background: var(--light-blue); border: none; color: var(--primary-blue); width: 40px; height: 40px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: var(--transition); }
+    .cal-btn:hover { background: var(--primary-blue); color: white; }
+    
+    .events-full-list { display: flex; flex-direction: column; gap: 20px; }
+    .event-full-card {
+      background: var(--white); border-radius: var(--border-radius); padding: 24px;
+      box-shadow: var(--shadow); display: flex; gap: 24px; align-items: flex-start;
+      transition: var(--transition); border-left: 5px solid var(--primary-blue);
+    }
+    .event-full-card:hover { transform: translateX(6px); box-shadow: var(--shadow-hover); }
+    .event-full-card.red { border-left-color: var(--opes-red); }
+    .event-full-card.green { border-left-color: var(--opes-green); }
+    .event-full-card.purple { border-left-color: #8e44ad; }
+    .event-full-card.orange { border-left-color: #e67e22; }
+    
+    .event-date-block { min-width: 70px; text-align: center; }
+    .event-date-block .date-num { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 40px; color: var(--primary-blue); line-height: 1; }
+    .event-full-card.red .event-date-block .date-num { color: var(--opes-red); }
+    .event-full-card.green .event-date-block .date-num { color: var(--opes-green); }
+    .event-full-card.purple .event-date-block .date-num { color: #8e44ad; }
+    .event-full-card.orange .event-date-block .date-num { color: #e67e22; }
+    .event-date-block .date-month { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+    .event-date-block .date-year { font-size: 11px; color: var(--gray); }
+    
+    .event-divider { width: 2px; background: var(--light-gray); min-height: 80px; align-self: stretch; }
+    
+    .event-main { flex: 1; }
+    .event-type { display: inline-block; background: var(--light-blue); color: var(--primary-blue); padding: 4px 12px; border-radius: 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .event-full-card.red .event-type { background: #fdedec; color: var(--opes-red); }
+    .event-full-card.green .event-type { background: #eafaf1; color: var(--opes-green); }
+    .event-main h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: var(--dark-gray); margin-bottom: 8px; line-height: 1.4; }
+    .event-main p { font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 12px; }
+    .event-details { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--dark-gray); }
+    .event-details span { display: flex; align-items: center; gap: 6px; }
+    .event-details i { color: var(--primary-blue); }
+    
+    .event-action { display: flex; flex-direction: column; gap: 8px; min-width: 130px; }
+    .btn-register { background: var(--primary-blue); color: white; padding: 10px 16px; border-radius: 20px; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-align: center; transition: var(--transition); border: 2px solid var(--primary-blue); }
+    .btn-register:hover { background: transparent; color: var(--primary-blue); }
+    .btn-info { background: transparent; color: var(--primary-blue); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; text-align: center; border: 1px solid var(--light-blue); transition: var(--transition); }
+    .btn-info:hover { background: var(--light-blue); }
+    
+    .months-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .month-btn { padding: 6px 14px; border-radius: 16px; border: 1px solid var(--light-blue); background: var(--white); font-size: 12px; font-weight: 600; cursor: pointer; transition: var(--transition); font-family: 'Montserrat', sans-serif; color: var(--dark-gray); }
+    .month-btn.active, .month-btn:hover { background: var(--primary-blue); color: white; border-color: var(--primary-blue); }
+
+    @media (max-width: 768px) {
+      .event-full-card { flex-direction: column; }
+      .event-divider { display: none; }
+      .event-action { flex-direction: row; }
+      .event-date-block .date-num { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left"><a href="mailto:opes.marche@gmail.com"><i class="fas fa-envelope"></i> opes.marche@gmail.com</a></div>
+      <div class="top-bar-right"><a href="https://www.facebook.com/opesmarche" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/opesmarche" target="_blank"><i class="fab fa-instagram"></i></a></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo-area"><div class="logo-text-area"><div class="logo-title">OPES</div><div class="logo-subtitle">Comitato Reg. Marche</div></div></a>
+        <ul class="nav-menu" id="navMenu">
+          <button class="mobile-menu-close" id="closeMenu"><i class="fas fa-times"></i></button>
+          <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a href="chi-siamo.html" class="nav-link">Chi Siamo</a></li>
+          <li class="nav-item"><a href="sport.html" class="nav-link">Sport</a></li>
+          <li class="nav-item"><a href="affiliazione.html" class="nav-link">Affiliazione</a></li>
+          <li class="nav-item"><a href="eventi.html" class="nav-link active">Eventi</a></li>
+          <li class="nav-item"><a href="news.html" class="nav-link">News</a></li>
+          <li class="nav-item"><a href="contatti.html" class="nav-link">Contatti</a></li>
+          <li class="nav-item"><a href="affiliazione.html#come-affiliarsi" class="nav-link header-cta"><i class="fas fa-plus-circle"></i> Affiliati</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <h1>Calendario Eventi</h1>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Eventi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section style="background: var(--light-gray);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div class="section-label"><i class="fas fa-calendar-alt"></i> 2026</div>
+          <h2 class="section-title" style="margin-bottom: 0;">Prossimi <span>Appuntamenti</span></h2>
+        </div>
+        <select id="sportFilter" style="padding: 10px 16px; border-radius: 8px; border: 2px solid var(--light-blue); font-family: 'Montserrat', sans-serif; font-size: 13px; color: var(--dark-gray); background: white; cursor: pointer;">
+          <option value="all">Tutte le Discipline</option>
+          <option value="calcio">Calcio</option>
+          <option value="basket">Basket</option>
+          <option value="pallavolo">Pallavolo</option>
+          <option value="nuoto">Nuoto</option>
+          <option value="atletica">Atletica</option>
+          <option value="formazione">Formazione</option>
+          <option value="fitness">Fitness</option>
+          <option value="altro">Altro</option>
+        </select>
+      </div>
+
+      <div class="months-filter">
+        <button class="month-btn active" data-month="all">Tutti</button>
+        <button class="month-btn" data-month="3">Marzo</button>
+        <button class="month-btn" data-month="4">Aprile</button>
+        <button class="month-btn" data-month="5">Maggio</button>
+        <button class="month-btn" data-month="6">Giugno</button>
+        <button class="month-btn" data-month="9">Settembre</button>
+        <button class="month-btn" data-month="10">Ottobre</button>
+      </div>
+
+      <div class="events-full-list" id="eventsList">
+
+        <!-- EVENT 1: Interventi su Traumi Sportivi -->
+        <div class="event-full-card fade-in" data-sport="formazione" data-month="3">
+          <div class="event-date-block">
+            <div class="date-num">20</div>
+            <div class="date-month">Mar</div>
+            <div class="date-year">2026</div>
+          </div>
+          <div class="event-divider"></div>
+          <div class="event-main">
+            <span class="event-type">Formazione / Lezione Teorica</span>
+            <h3>Interventi su Traumi Sportivi – Lezione Teorica</h3>
+            <p>Lezione teorica dedicata ai traumi sportivi più comuni e alle corrette procedure di primo intervento. Approccio alla traumatologia e ai relativi problemi clinici nelle attività sportive. A cura di Inf. Losasso Lisa e Massimo Pistoni, Formatore Regionale OPES.</p>
+            <div class="event-details">
+              <span><i class="fas fa-map-marker-alt"></i> Crocegialla Chiaravalle – Via FratelliCervi 1A, Chiaravalle (AN)</span>
+              <span><i class="fas fa-clock"></i> 21:00</span>
+              <span><i class="fas fa-users"></i> Croce Gialla Chiaravalle ODV</span>
+              <span><i class="fas fa-phone"></i> 071/948156</span>
+            </div>
+          </div>
+          <div class="event-action">
+            <a href="contatti.html" class="btn-register">Info</a>
+          </div>
+        </div>
+
+        <!-- EVENT 2: Clinic Velocità -->
+        <div class="event-full-card fade-in" style="border-left-color:#e67e22;" data-sport="formazione" data-month="3">
+          <div class="event-date-block">
+            <div class="date-num" style="color:#e67e22;">31</div>
+            <div class="date-month">Mar</div>
+            <div class="date-year">2026</div>
+          </div>
+          <div class="event-divider"></div>
+          <div class="event-main">
+            <span class="event-type" style="background:#fef9e7;color:#e67e22;">Clinic – Scadenza Iscrizioni</span>
+            <h3>Clinic Velocità nello Sport – Scadenza Iscrizioni (ore 18:00)</h3>
+            <p>Clinic gratuito su metodologie di allenamento della velocità nello sport di squadra e individuale, settore giovanile. Con Massimo Pistoni, Preparatore Fisico CONI. Attestato riconosciuto SNaQ e aggiornamento scolastico MIUR. Max 18 partecipanti. Iscrizioni entro le ore 18:00 a: partecipazioneopescorsi@gmail.com</p>
+            <div class="event-details">
+              <span><i class="fas fa-map-marker-alt"></i> Centro di Formazione Sportiva OPES – Stadio Comunale di Chiaravalle, Via Puccini 29/a</span>
+              <span><i class="fas fa-clock"></i> Clinic: 18:00 – 20:30</span>
+              <span><i class="fas fa-envelope"></i> partecipazioneopescorsi@gmail.com</span>
+              <span><i class="fas fa-users"></i> Gratuito – max 18 posti</span>
+            </div>
+          </div>
+          <div class="event-action">
+            <a href="mailto:partecipazioneopescorsi@gmail.com" class="btn-register" style="background:#e67e22;border-color:#e67e22;">Iscriviti</a>
+            <a href="contatti.html" class="btn-info">Info</a>
+          </div>
+        </div>
+
+        <!-- EVENT 3: Fitness Competition selezioni -->
+        <div class="event-full-card fade-in" style="border-left-color:#8e44ad;" data-sport="fitness" data-month="4">
+          <div class="event-date-block">
+            <div class="date-num" style="color:#8e44ad;">05</div>
+            <div class="date-month">Apr</div>
+            <div class="date-year">2026</div>
+          </div>
+          <div class="event-divider"></div>
+          <div class="event-main">
+            <span class="event-type" style="background:#f5eef8;color:#8e44ad;">Fitness Competition 3.2.1 – Scadenza Video</span>
+            <h3>Fitness Competition 3.2.1 – Scadenza Invio Video Selezioni</h3>
+            <p>Termine ultimo per l'invio dei video di selezione delle ASD/SSD affiliate. Il video (un unico video per le 3 prove: Squat, Push Up, Burpees Over The Line) deve essere inviato nel gruppo WhatsApp dedicato. Evento competitivo dilettantistico – competizione di interesse nazionale OPES nel settore Cultura Fisica e Ginnastica Finalizzata alla Salute ed al Fitness.</p>
+            <div class="event-details">
+              <span><i class="fas fa-map-marker-alt"></i> Presso i propri centri ASD/SSD affiliati</span>
+              <span><i class="fas fa-clock"></i> Entro domenica 5 aprile</span>
+              <span><i class="fas fa-whatsapp"></i> WhatsApp: 331 2875923</span>
+              <span><i class="fas fa-dumbbell"></i> Fitness / Cultura Fisica</span>
+            </div>
+          </div>
+          <div class="event-action">
+            <a href="contatti.html" class="btn-register" style="background:#8e44ad;border-color:#8e44ad;">Info</a>
+          </div>
+        </div>
+
+        <!-- EVENT 4: Corso Istruttori Ginnastica -->
+        <div class="event-full-card red fade-in" data-sport="formazione" data-month="4">
+          <div class="event-date-block">
+            <div class="date-num">18</div>
+            <div class="date-month">Apr</div>
+            <div class="date-year">2026</div>
+          </div>
+          <div class="event-divider"></div>
+          <div class="event-main">
+            <span class="event-type" style="background:#fdedec;color:var(--opes-red);">Corso Istruttori</span>
+            <h3>6° Corso per Istruttori di Ginnastica Finalizzata alla Salute e al Fitness – con Specializzazione in Educazione al Movimento</h3>
+            <p>Corso multidisciplinare per attività del settore giovanile (4-12 anni). Rilascio Diploma Istruttore di Ginnastica Finalizzata alla Salute ed al Fitness con specializzazione in Educazione al Movimento di 1° livello. Competenze di pronto insegnamento dell'attività motoria di base.</p>
+            <div class="event-details">
+              <span><i class="fas fa-map-marker-alt"></i> Da definire – OPES Marche</span>
+              <span><i class="fas fa-clock"></i> Sabato 18 e Domenica 19 Aprile 2026</span>
+              <span><i class="fas fa-graduation-cap"></i> Diploma riconosciuto OPES / SNaQ</span>
+              <span><i class="fas fa-child"></i> Sport giovanile 4-12 anni</span>
+            </div>
+          </div>
+          <div class="event-action">
+            <a href="contatti.html" class="btn-register" style="background:var(--opes-red);border-color:var(--opes-red);">Iscriviti</a>
+            <a href="contatti.html" class="btn-info">Info</a>
+          </div>
+        </div>
+
+        <!-- EVENT 5: Fitness Competition Finali Regionali -->
+        <div class="event-full-card fade-in" style="border-left-color:#8e44ad;" data-sport="fitness" data-month="5">
+          <div class="event-date-block">
+            <div class="date-num" style="color:#8e44ad;">09</div>
+            <div class="date-month">Mag</div>
+            <div class="date-year">2026</div>
+          </div>
+          <div class="event-divider"></div>
+          <div class="event-main">
+            <span class="event-type" style="background:#f5eef8;color:#8e44ad;">🏆 Competizione Regionale</span>
+            <h3>Fitness Competition 3.2.1 – Finali Regionali OPES</h3>
+            <p>Finali regionali della Fitness Competition 3.2.1. Categorie: Base Uomo, Base Donna, Avanzato Uomo, Avanzato Donna. Prove: Squat, Push Up, Burpees Over the Line + Sit Up (Butterfly), Lunges/Military Press. Premi per i primi classificati: vacanza sportiva gratuita a Vieste (Gargano), diploma e gadget. 1° classificato Cat. Avanzato: €200 + vacanza gratuita.</p>
+            <div class="event-details">
+              <span><i class="fas fa-map-marker-alt"></i> Palestra Happiness, Loreto (AN)</span>
+              <span><i class="fas fa-clock"></i> ore 14:30</span>
+              <span><i class="fas fa-trophy"></i> Premiazioni per i primi 3 classificati per categoria</span>
+              <span><i class="fas fa-phone"></i> Info: 331 2875923 (Gianluca)</span>
+            </div>
+          </div>
+          <div class="event-action">
+            <a href="contatti.html" class="btn-register" style="background:#8e44ad;border-color:#8e44ad;">Iscriviti</a>
+            <a href="contatti.html" class="btn-info">Info</a>
+          </div>
+        </div>
+
+        <!-- EVENT 6: OPES Summer and Sport -->
+        <div class="event-full-card green fade-in" data-sport="altro" data-month="5">
+          <div class="event-date-block">
+            <div class="date-num">30</div>
+            <div class="date-month">Mag</div>
+            <div class="date-year">2026</div>
+          </div>
+          <div class="event-divider"></div>
+          <div class="event-main">
+            <span class="event-type" style="background:#eafaf1;color:var(--opes-green);">🌊 Vacanza Sportiva</span>
+            <h3>OPES Summer and Sport – Vieste, Gargano, Puglia</h3>
+            <p>La tua vacanza sportiva! 4 giorni e 3 notti a Vieste nel Gargano presso "Le Diomedee Family Village & Camping". Escursioni Grotte Marine, Tour Isole Tremiti, Foresta Umbra, sport, formazione, stage e gare. Pensione completa con acqua illimitata, spiaggia privata, piscina, Wi-Fi, campi sportivi. Adulti €249/p.p. – Ragazzi (2-12 anni) €199/p.p. – 0-2 anni gratis.</p>
+            <div class="event-details">
+              <span><i class="fas fa-map-marker-alt"></i> Le Diomedee Family Village – Vieste, Gargano (PG)</span>
+              <span><i class="fas fa-clock"></i> 30 Maggio – 2 Giugno 2026</span>
+              <span><i class="fas fa-phone"></i> 329/9627016 – 340/2114795</span>
+              <span><i class="fas fa-envelope"></i> opes.marche@gmail.com</span>
+            </div>
+          </div>
+          <div class="event-action">
+            <a href="contatti.html" class="btn-register" style="background:var(--opes-green);border-color:var(--opes-green);">Iscriviti</a>
+            <a href="contatti.html" class="btn-info">Info</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPONI EVENTO -->
+  <section style="background: var(--white); padding: 70px 0;">
+    <div class="container" style="max-width: 700px; text-align: center;">
+      <div class="fade-in">
+        <div class="section-label" style="justify-content: center;"><i class="fas fa-plus-circle"></i> Proponi un Evento</div>
+        <h2 class="section-title">Vuoi organizzare un evento <span>OPES?</span></h2>
+        <p class="section-text" style="margin: 0 auto 30px;">
+          Le società affiliate OPES Marche possono proporre manifestazioni sportive, 
+          tornei e campionati da inserire nel calendario regionale ufficiale.
+        </p>
+        <a href="contatti.html" class="btn-blue"><i class="fas fa-envelope"></i> Contattaci per informazioni</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="italy-bar"><span></span><span></span><span></span></div>
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div><div class="footer-logo-area"><div class="footer-logo-text">OPES</div><div class="footer-logo-sub">Comitato Regionale Marche</div></div><p class="footer-desc">Ente di Promozione Sportiva riconosciuto dal CONI.</p><div class="footer-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+          <div class="footer-col"><h4>Link Rapidi</h4><ul class="footer-links"><li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="chi-siamo.html"><i class="fas fa-chevron-right"></i> Chi Siamo</a></li><li><a href="sport.html"><i class="fas fa-chevron-right"></i> Sport</a></li><li><a href="affiliazione.html"><i class="fas fa-chevron-right"></i> Affiliazione</a></li><li><a href="eventi.html"><i class="fas fa-chevron-right"></i> Eventi</a></li><li><a href="news.html"><i class="fas fa-chevron-right"></i> News</a></li><li><a href="contatti.html"><i class="fas fa-chevron-right"></i> Contatti</a></li></ul></div>
+          <div class="footer-col"><h4>Sport</h4><ul class="footer-links"><li><a href="sport.html#calcio"><i class="fas fa-chevron-right"></i> Calcio</a></li><li><a href="sport.html#basket"><i class="fas fa-chevron-right"></i> Basket</a></li><li><a href="sport.html#pallavolo"><i class="fas fa-chevron-right"></i> Pallavolo</a></li><li><a href="sport.html#nuoto"><i class="fas fa-chevron-right"></i> Nuoto</a></li></ul></div>
+          <div class="footer-col"><h4>Contatti</h4><div class="footer-contact-item"><div class="icon"><i class="fas fa-envelope"></i></div><div class="text"><strong>Email</strong>opes.marche@gmail.com</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container"><div class="footer-bottom-inner"><p>© 2025 OPES - Comitato Regionale Marche.</p><div class="footer-bottom-links"><a href="privacy.html">Privacy</a><a href="contatti.html">Contatti</a></div></div></div></div>
+  </footer>
+
+  <button id="scrollTop" aria-label="Torna su"><i class="fas fa-arrow-up"></i></button>
+  <script src="js/main.js"></script>
+  <script>
+    // Month filter
+    document.querySelectorAll('.month-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        filterEvents();
+      });
+    });
+    document.getElementById('sportFilter').addEventListener('change', filterEvents);
+    
+    function filterEvents() {
+      const month = document.querySelector('.month-btn.active').dataset.month;
+      const sport = document.getElementById('sportFilter').value;
+      document.querySelectorAll('.events-full-list .event-full-card').forEach(card => {
+        const monthMatch = month === 'all' || card.dataset.month === month;
+        const sportMatch = sport === 'all' || card.dataset.sport === sport;
+        card.style.display = (monthMatch && sportMatch) ? 'flex' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
