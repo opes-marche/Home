@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discipline sportive OPES Marche: calcio, basket, pallavolo, nuoto, atletica, arti marziali e molte altre.">
+  <title>Discipline Sportive – OPES Comitato Regionale Marche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .sport-filter {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-bottom: 40px;
+    }
+    .filter-btn {
+      padding: 8px 20px; border-radius: 20px; border: 2px solid var(--primary-blue);
+      background: transparent; color: var(--primary-blue); font-family: 'Montserrat', sans-serif;
+      font-weight: 600; font-size: 13px; cursor: pointer; transition: var(--transition);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary-blue); color: var(--white);
+    }
+    .sport-detail-card {
+      background: var(--white); border-radius: var(--border-radius-lg);
+      overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);
+    }
+    .sport-detail-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .sport-card-header {
+      background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+      padding: 30px; text-align: center; color: var(--white);
+    }
+    .sport-card-header.red { background: linear-gradient(135deg, var(--opes-red), #e74c3c); }
+    .sport-card-header.green { background: linear-gradient(135deg, var(--opes-green), #2ecc71); }
+    .sport-card-header.purple { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
+    .sport-card-header.orange { background: linear-gradient(135deg, #e67e22, #f39c12); }
+    .sport-card-header.teal { background: linear-gradient(135deg, #1abc9c, #16a085); }
+    .sport-card-header i { font-size: 48px; margin-bottom: 12px; display: block; }
+    .sport-card-header h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 4px; }
+    .sport-card-header span { font-size: 12px; opacity: 0.85; }
+    .sport-card-body { padding: 24px; }
+    .sport-card-body p { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 16px; }
+    .sport-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sport-tag { background: var(--light-blue); color: var(--primary-blue); padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+    
+    .sports-full-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    @media (max-width: 992px) { .sports-full-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .sports-full-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <a href="mailto:opes.marche@gmail.com"><i class="fas fa-envelope"></i> opes.marche@gmail.com</a>
+        <a href="tel:+393299627016"><i class="fas fa-phone"></i> Vincenzo: 329 962 7016</a>
+        <a href="tel:+393402114795"><i class="fas fa-phone"></i> Michele: 340 211 4795</a>
+      </div>
+      <div class="top-bar-right">
+        <a href="https://www.facebook.com/opesmarche" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/opesmarche" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo-area">
+          <img src="images/logo-opes.png" alt="OPES Comitato Regionale Marche" style="height:52px; width:auto; object-fit:contain; filter: brightness(0) invert(1);">
+        </a>
+        <ul class="nav-menu" id="navMenu">
+          <button class="mobile-menu-close" id="closeMenu"><i class="fas fa-times"></i></button>
+          <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a href="chi-siamo.html" class="nav-link">Chi Siamo</a></li>
+          <li class="nav-item"><a href="sport.html" class="nav-link active">Sport</a></li>
+          <li class="nav-item"><a href="affiliazione.html" class="nav-link">Affiliazione</a></li>
+          <li class="nav-item"><a href="eventi.html" class="nav-link">Eventi</a></li>
+          <li class="nav-item">
+          <a href="news.html" class="nav-link">News <i class="fas fa-chevron-down fa-xs"></i></a>
+          <ul class="dropdown">
+            <li><a href="news.html" class="dropdown-link"><i class="fas fa-newspaper"></i> News Comitato Marche</a></li>
+            <li><a href="https://www.opesitalia.it/news/" target="_blank" class="dropdown-link"><i class="fas fa-globe"></i> News OPES Italia</a></li>
+          </ul>
+        </li>
+          <li class="nav-item"><a href="contatti.html" class="nav-link">Contatti</a></li>
+          <li class="nav-item"><a href="affiliazione.html#come-affiliarsi" class="nav-link header-cta"><i class="fas fa-plus-circle"></i> Affiliati</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <h1>Discipline Sportive</h1>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Sport</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPORTS LIST -->
+  <section style="background: var(--light-gray);">
+    <div class="container">
+      <div class="section-header centered fade-in">
+        <div class="section-label"><i class="fas fa-running"></i> Discipline</div>
+        <h2 class="section-title">Oltre <span>30 Sport</span> nelle Marche</h2>
+        <p class="section-text">
+          OPES Marche organizza campionati e attività in tutte le principali discipline sportive, 
+          con programmi per ogni età e livello di pratica.
+        </p>
+      </div>
+
+      <div class="sport-filter">
+        <button class="filter-btn active" data-filter="all">Tutti</button>
+        <button class="filter-btn" data-filter="squadra">Sport di Squadra</button>
+        <button class="filter-btn" data-filter="individuale">Sport Individuali</button>
+        <button class="filter-btn" data-filter="acqua">Sport Acquatici</button>
+        <button class="filter-btn" data-filter="combattimento">Arti Marziali</button>
+        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+      </div>
+
+      <div class="sports-full-grid" id="sportsGrid">
+
+        <div class="sport-detail-card fade-in" id="calcio" data-cat="squadra">
+          <div class="sport-card-header red">
+            <i class="fas fa-futbol"></i>
+            <h3>Calcio</h3>
+            <span>Sport di Squadra</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Il calcio è tra le discipline più praticate nelle Marche. OPES organizza campionati di calcio a 5 e calcio a 11, dalla categoria giovanile ai tornei amatoriali senior.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Calcio a 5</span>
+              <span class="sport-tag">Calcio a 11</span>
+              <span class="sport-tag">Giovanili</span>
+              <span class="sport-tag">Amatoriale</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" id="basket" data-cat="squadra">
+          <div class="sport-card-header">
+            <i class="fas fa-basketball-ball"></i>
+            <h3>Basket</h3>
+            <span>Sport di Squadra</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Il basket OPES Marche comprende campionati under, senior e minibasket. Forte presenza nelle province di Ancona e Pesaro con tornei invernali ed estivi.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Minibasket</span>
+              <span class="sport-tag">Under 14/16/18</span>
+              <span class="sport-tag">Senior</span>
+              <span class="sport-tag">3x3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" id="pallavolo" data-cat="squadra">
+          <div class="sport-card-header green">
+            <i class="fas fa-volleyball-ball"></i>
+            <h3>Pallavolo</h3>
+            <span>Sport di Squadra</span>
+          </div>
+          <div class="sport-card-body">
+            <p>La pallavolo è uno degli sport più diffusi della rete OPES Marche. Campionati maschili, femminili e misti, beach volley estivo e tornei promozionali.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Pallavolo Indoor</span>
+              <span class="sport-tag">Beach Volley</span>
+              <span class="sport-tag">Under</span>
+              <span class="sport-tag">Master</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" id="nuoto" data-cat="acqua">
+          <div class="sport-card-header teal">
+            <i class="fas fa-swimmer"></i>
+            <h3>Nuoto</h3>
+            <span>Sport Acquatici</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Il nuoto OPES offre corsi base, attività agonistica e categorie master. Gare regionali in vasche da 25 e 50 metri nelle principali piscine delle Marche.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Corsi Base</span>
+              <span class="sport-tag">Agonismo</span>
+              <span class="sport-tag">Master</span>
+              <span class="sport-tag">Sincronizzato</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" id="atletica" data-cat="individuale">
+          <div class="sport-card-header orange">
+            <i class="fas fa-running"></i>
+            <h3>Atletica Leggera</h3>
+            <span>Sport Individuale</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Pista, campestre e podismo. OPES Marche organizza gare regionali di atletica, corse campestri e partecipa ai circuiti podistici nelle Marche.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Pista</span>
+              <span class="sport-tag">Campestre</span>
+              <span class="sport-tag">Podismo</span>
+              <span class="sport-tag">Marcia</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" id="arti-marziali" data-cat="combattimento">
+          <div class="sport-card-header purple">
+            <i class="fas fa-fist-raised"></i>
+            <h3>Arti Marziali</h3>
+            <span>Combattimento</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Karate, Judo, Taekwondo, Kickboxing e discipline orientali. OPES Marche è punto di riferimento per le arti marziali nella regione con cinture e campionati regionali.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Karate</span>
+              <span class="sport-tag">Judo</span>
+              <span class="sport-tag">Taekwondo</span>
+              <span class="sport-tag">Kickboxing</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" data-cat="individuale">
+          <div class="sport-card-header" style="background: linear-gradient(135deg, #d35400, #e67e22);">
+            <i class="fas fa-dumbbell"></i>
+            <h3>Fitness & Body Building</h3>
+            <span>Sport Individuale</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Fitness, body building, crossfit e ginnastica artistica. Competizioni regionali e nazionali per atleti di ogni livello.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Fitness</span>
+              <span class="sport-tag">Body Building</span>
+              <span class="sport-tag">Ginnastica</span>
+              <span class="sport-tag">Crossfit</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" id="tennis" data-cat="individuale">
+          <div class="sport-card-header red">
+            <i class="fas fa-table-tennis"></i>
+            <h3>Tennis & Padel</h3>
+            <span>Sport con Racchetta</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Tennis, padel e tennis tavolo. Tornei individuali e di doppio, campionati regionali e circuiti locali nelle Marche.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Tennis</span>
+              <span class="sport-tag">Padel</span>
+              <span class="sport-tag">Tennis Tavolo</span>
+              <span class="sport-tag">Torni</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" data-cat="squadra">
+          <div class="sport-card-header green">
+            <i class="fas fa-hockey-puck"></i>
+            <h3>Hockey & Rugby</h3>
+            <span>Sport di Squadra</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Hockey su prato, hockey su ghiaccio e rugby. Discipline emergenti nella rete OPES Marche con crescita costante di praticanti.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Hockey Prato</span>
+              <span class="sport-tag">Rugby</span>
+              <span class="sport-tag">Flag Football</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" data-cat="outdoor">
+          <div class="sport-card-header" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+            <i class="fas fa-bicycle"></i>
+            <h3>Ciclismo & MTB</h3>
+            <span>Outdoor</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Ciclismo su strada, mountain bike e cicloturismo. Gare regionali e raduni nelle suggestive colline e montagne delle Marche.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Ciclismo Strada</span>
+              <span class="sport-tag">MTB</span>
+              <span class="sport-tag">Cicloturismo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" data-cat="individuale">
+          <div class="sport-card-header purple">
+            <i class="fas fa-spa"></i>
+            <h3>Danza Sportiva</h3>
+            <span>Sport Individuale</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Danza sportiva, hip hop, danza moderna e classica. Competizioni regionali e nazionali per bambini, giovani e adulti.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Danza Moderna</span>
+              <span class="sport-tag">Hip Hop</span>
+              <span class="sport-tag">Classico</span>
+              <span class="sport-tag">Latino</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sport-detail-card fade-in" data-cat="outdoor">
+          <div class="sport-card-header" style="background: linear-gradient(135deg, #2980b9, #3498db);">
+            <i class="fas fa-mountain"></i>
+            <h3>Sport della Montagna</h3>
+            <span>Outdoor</span>
+          </div>
+          <div class="sport-card-body">
+            <p>Escursionismo, sci alpino, snowboard e arrampicata sportiva. Attività outdoor sui Sibillini e l'Appennino marchigiano.</p>
+            <div class="sport-tags">
+              <span class="sport-tag">Sci Alpino</span>
+              <span class="sport-tag">Snowboard</span>
+              <span class="sport-tag">Arrampicata</span>
+              <span class="sport-tag">Trekking</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA AFFILIAZIONE -->
+  <section class="affiliazione-section">
+    <div class="container">
+      <div class="affiliazione-inner">
+        <div class="affiliazione-text fade-in">
+          <h2>La tua disciplina non è elencata?</h2>
+          <p>OPES Marche è aperta a tutte le discipline sportive. Contattaci per affiliare la tua società e promuovere il tuo sport nelle Marche!</p>
+        </div>
+        <a href="contatti.html" class="btn-white fade-in"><i class="fas fa-envelope"></i> Contattaci</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="italy-bar"><span></span><span></span><span></span></div>
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo-area">
+              <div class="footer-logo-text">OPES</div>
+              <div class="footer-logo-sub">Comitato Regionale Marche</div>
+            </div>
+            <p class="footer-desc">Ente di Promozione Sportiva riconosciuto dal CONI.</p>
+            <div class="footer-social">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Link Rapidi</h4>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="chi-siamo.html"><i class="fas fa-chevron-right"></i> Chi Siamo</a></li>
+              <li><a href="sport.html"><i class="fas fa-chevron-right"></i> Sport</a></li>
+              <li><a href="affiliazione.html"><i class="fas fa-chevron-right"></i> Affiliazione</a></li>
+              <li><a href="eventi.html"><i class="fas fa-chevron-right"></i> Eventi</a></li>
+              <li><a href="news.html"><i class="fas fa-chevron-right"></i> News</a></li>
+              <li><a href="contatti.html"><i class="fas fa-chevron-right"></i> Contatti</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Discipline</h4>
+            <ul class="footer-links">
+              <li><a href="#calcio"><i class="fas fa-chevron-right"></i> Calcio</a></li>
+              <li><a href="#basket"><i class="fas fa-chevron-right"></i> Basket</a></li>
+              <li><a href="#pallavolo"><i class="fas fa-chevron-right"></i> Pallavolo</a></li>
+              <li><a href="#nuoto"><i class="fas fa-chevron-right"></i> Nuoto</a></li>
+              <li><a href="#atletica"><i class="fas fa-chevron-right"></i> Atletica</a></li>
+              <li><a href="#arti-marziali"><i class="fas fa-chevron-right"></i> Arti Marziali</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contatti</h4>
+            <div class="footer-contact-item">
+              <div class="icon"><i class="fas fa-envelope"></i></div>
+              <div class="text"><strong>Email</strong>opes.marche@gmail.com</div>
+            </div>
+            <div class="footer-contact-item">
+              <div class="icon"><i class="fas fa-globe"></i></div>
+              <div class="text"><a href="https://www.opesitalia.it" target="_blank" style="color: var(--accent-blue);">www.opesitalia.it</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <p>© 2025 OPES - Comitato Regionale Marche. Tutti i diritti riservati.</p>
+          <div class="footer-bottom-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contatti.html">Contatti</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" aria-label="Torna su"><i class="fas fa-arrow-up"></i></button>
+  <script src="js/main.js"></script>
+  <script>
+    // Sport Filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.dataset.filter;
+        document.querySelectorAll('.sport-detail-card').forEach(card => {
+          if (filter === 'all' || card.dataset.cat === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
