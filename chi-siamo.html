@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chi siamo - OPES Comitato Regionale Marche. Storia, missione, valori e organi direttivi.">
+  <title>Chi Siamo – OPES Comitato Regionale Marche</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .timeline { position: relative; padding: 20px 0; }
+    .timeline::before {
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 3px; background: linear-gradient(to bottom, var(--primary-blue), var(--opes-red));
+      transform: translateX(-50%);
+    }
+    .timeline-item { display: flex; gap: 50px; margin-bottom: 50px; align-items: flex-start; }
+    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+    .timeline-content {
+      flex: 1; background: var(--white); border-radius: var(--border-radius);
+      padding: 28px; box-shadow: var(--shadow); border-left: 4px solid var(--primary-blue);
+    }
+    .timeline-item:nth-child(even) .timeline-content { border-left: none; border-right: 4px solid var(--opes-red); }
+    .timeline-dot {
+      width: 50px; height: 50px; min-width: 50px; background: var(--primary-blue);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-weight: 900; font-size: 12px; font-family: 'Montserrat', sans-serif;
+      position: relative; z-index: 1; box-shadow: 0 0 0 6px rgba(0,48,135,0.1);
+    }
+    .timeline-item:nth-child(even) .timeline-dot { background: var(--opes-red); box-shadow: 0 0 0 6px rgba(192,57,43,0.1); }
+    .timeline-content h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: var(--primary-blue); margin-bottom: 8px; }
+    .timeline-item:nth-child(even) .timeline-content h3 { color: var(--opes-red); }
+    .timeline-content p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+    
+    .value-card {
+      background: var(--white); border-radius: var(--border-radius-lg); padding: 36px;
+      box-shadow: var(--shadow); text-align: center; transition: var(--transition);
+    }
+    .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .value-icon {
+      width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+      border-radius: 20px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; font-size: 32px; color: var(--white);
+    }
+    .value-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 18px; color: var(--dark-gray); margin-bottom: 12px; }
+    .value-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+    
+    .consiglio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .membro-card {
+      background: var(--white); border-radius: var(--border-radius); padding: 28px;
+      box-shadow: var(--shadow); text-align: center; transition: var(--transition);
+      border-top: 4px solid var(--primary-blue);
+    }
+    .membro-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .membro-avatar {
+      width: 80px; height: 80px; background: var(--light-blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+      font-size: 32px; color: var(--primary-blue);
+    }
+    .membro-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; color: var(--dark-gray); margin-bottom: 4px; }
+    .membro-card .ruolo { font-size: 13px; color: var(--primary-blue); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+    @media (max-width: 768px) {
+      .timeline::before { left: 24px; }
+      .timeline-item, .timeline-item:nth-child(even) { flex-direction: row; gap: 20px; }
+      .timeline-item:nth-child(even) .timeline-content { border-left: 4px solid var(--opes-red); border-right: none; }
+      .consiglio-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) { .consiglio-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <a href="mailto:opes.marche@gmail.com"><i class="fas fa-envelope"></i> opes.marche@gmail.com</a>
+        <a href="tel:+393299627016"><i class="fas fa-phone"></i> Vincenzo: 329 962 7016</a>
+        <a href="tel:+393402114795"><i class="fas fa-phone"></i> Michele: 340 211 4795</a>
+      </div>
+      <div class="top-bar-right">
+        <a href="https://www.facebook.com/opesmarche" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/opesmarche" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@opesmarche" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo-area">
+          <img src="images/logo-opes.png" alt="OPES Comitato Regionale Marche" style="height:52px; width:auto; object-fit:contain; filter: brightness(0) invert(1);">
+        </a>
+        <ul class="nav-menu" id="navMenu">
+          <button class="mobile-menu-close" id="closeMenu"><i class="fas fa-times"></i></button>
+          <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a href="chi-siamo.html" class="nav-link active">Chi Siamo</a></li>
+          <li class="nav-item"><a href="sport.html" class="nav-link">Sport</a></li>
+          <li class="nav-item"><a href="affiliazione.html" class="nav-link">Affiliazione</a></li>
+          <li class="nav-item"><a href="eventi.html" class="nav-link">Eventi</a></li>
+          <li class="nav-item">
+          <a href="https://www.opesitalia.it/news/" target="_blank" class="nav-link"><i class="fas fa-newspaper"></i> News</a>
+        </li>
+          <li class="nav-item"><a href="contatti.html" class="nav-link">Contatti</a></li>
+          <li class="nav-item"><a href="affiliazione.html#come-affiliarsi" class="nav-link header-cta"><i class="fas fa-plus-circle"></i> Affiliati</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content">
+        <h1>Chi Siamo</h1>
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Chi Siamo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section style="background: var(--white);">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image-area fade-in">
+          <div class="about-main-img">
+            <img src="images/header.png" alt="OPES Marche" loading="lazy">
+          </div>
+          <div class="about-accent"></div>
+          <div class="about-badge-img">
+            <div class="badge-icon-lg"><i class="fas fa-shield-alt"></i></div>
+            <div class="about-badge-text">
+              <strong>Dal 1990</strong>
+              <span>Nelle Marche</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-content fade-in">
+          <div class="section-label"><i class="fas fa-info-circle"></i> La Nostra Storia</div>
+          <h2 class="section-title">OPES <span>Marche</span></h2>
+          <p class="section-text">
+            <strong>OPES – Organizzazione Per l'Educazione allo Sport</strong> è un Ente di Promozione 
+            Sportiva riconosciuto dal CONI (Comitato Olimpico Nazionale Italiano) che opera in tutta 
+            Italia attraverso i Comitati Regionali e Provinciali.
+          </p>
+          <p class="section-text" style="margin-top: 14px;">
+            Il <strong>Comitato Regionale Marche</strong> nasce con l'obiettivo di promuovere 
+            la cultura sportiva nelle cinque province marchigiane – Ancona, Pesaro-Urbino, Macerata, 
+            Ascoli Piceno e Fermo – garantendo l'accesso allo sport a tutti i cittadini, 
+            indipendentemente dall'età, dal background sociale o dalle capacità fisiche.
+          </p>
+          <p class="section-text" style="margin-top: 14px;">
+            OPES Marche supporta oltre <strong>350 società sportive affiliate</strong> con servizi 
+            di tesseramento, formazione, organizzazione di campionati regionali e supporto 
+            amministrativo-legale. La nostra rete comprende più di 15.000 atleti tesserati 
+            nelle Marche in oltre 30 discipline sportive diverse.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSIONE E VALORI -->
+  <section id="missione" style="background: var(--light-gray);">
+    <div class="container">
+      <div class="section-header centered fade-in">
+        <div class="section-label"><i class="fas fa-bullseye"></i> Missione e Valori</div>
+        <h2 class="section-title">I Nostri <span>Valori</span></h2>
+        <p class="section-text">
+          OPES Marche opera sulla base di principi fondamentali che guidano ogni attività 
+          e ogni scelta organizzativa.
+        </p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;" class="values-wrap">
+        <div class="value-card fade-in">
+          <div class="value-icon"><i class="fas fa-heart"></i></div>
+          <h3>Inclusività</h3>
+          <p>Lo sport è per tutti. Promuoviamo l'accesso alle attività sportive senza discriminazioni di età, genere, nazionalità o capacità fisiche.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-icon" style="background: linear-gradient(135deg, var(--opes-red), #e74c3c);"><i class="fas fa-handshake"></i></div>
+          <h3>Solidarietà</h3>
+          <p>Crediamo nel potere dello sport come strumento di coesione sociale e sviluppo comunitario nelle Marche.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-icon" style="background: linear-gradient(135deg, var(--opes-green), #2ecc71);"><i class="fas fa-star"></i></div>
+          <h3>Eccellenza</h3>
+          <p>Puntiamo alla qualità in ogni attività, dalla formazione tecnica all'organizzazione degli eventi sportivi.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-icon" style="background: linear-gradient(135deg, #f39c12, #e67e22);"><i class="fas fa-leaf"></i></div>
+          <h3>Sostenibilità</h3>
+          <p>Promuoviamo uno sport rispettoso dell'ambiente e orientato allo sviluppo sostenibile del territorio.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-icon" style="background: linear-gradient(135deg, #8e44ad, #9b59b6);"><i class="fas fa-user-graduate"></i></div>
+          <h3>Formazione</h3>
+          <p>Investiamo nella formazione continua di tecnici, dirigenti e atleti per elevare la qualità dello sport regionale.</p>
+        </div>
+        <div class="value-card fade-in">
+          <div class="value-icon" style="background: linear-gradient(135deg, #1abc9c, #16a085);"><i class="fas fa-balance-scale"></i></div>
+          <h3>Etica Sportiva</h3>
+          <p>Il rispetto delle regole, l'antidoping e il fair play sono valori fondanti di ogni attività OPES.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE STORIA -->
+  <section style="background: var(--white);">
+    <div class="container">
+      <div class="section-header centered fade-in">
+        <div class="section-label"><i class="fas fa-history"></i> La nostra Storia</div>
+        <h2 class="section-title">Un Percorso di <span>Crescita</span></h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-content">
+            <h3>Fondazione OPES Nazionale</h3>
+            <p>OPES – Organizzazione Per l'Educazione allo Sport viene fondata con l'obiettivo di promuovere la pratica sportiva su tutto il territorio nazionale come strumento di crescita personale e sociale.</p>
+          </div>
+          <div class="timeline-dot">1990</div>
+          <div style="flex: 1;"></div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div style="flex: 1;"></div>
+          <div class="timeline-dot">1995</div>
+          <div class="timeline-content">
+            <h3>Riconoscimento CONI</h3>
+            <p>OPES ottiene il riconoscimento ufficiale dal CONI come Ente di Promozione Sportiva, consolidando il proprio ruolo nel panorama sportivo italiano e aprendo la strada a nuove affiliazioni.</p>
+          </div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-content">
+            <h3>Nascita del Comitato Regionale Marche</h3>
+            <p>Viene costituito il Comitato Regionale OPES Marche, con sede ad Ancona. Le prime affiliazioni comprendono circa 50 società sportive distribuite nelle province marchigiane.</p>
+          </div>
+          <div class="timeline-dot">2000</div>
+          <div style="flex: 1;"></div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div style="flex: 1;"></div>
+          <div class="timeline-dot">2010</div>
+          <div class="timeline-content">
+            <h3>Espansione e 100 Società</h3>
+            <p>Il Comitato Regionale Marche supera le 100 società affiliate e lancia i primi campionati regionali multidisciplinari, con oltre 3.000 atleti tesserati.</p>
+          </div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-content">
+            <h3>Programmi di Sport Sociale</h3>
+            <p>OPES Marche avvia programmi dedicati allo sport inclusivo, all'integrazione sociale attraverso lo sport e alle attività sportive nelle scuole della regione.</p>
+          </div>
+          <div class="timeline-dot">2015</div>
+          <div style="flex: 1;"></div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div style="flex: 1;"></div>
+          <div class="timeline-dot">2020</div>
+          <div class="timeline-content">
+            <h3>Resilienza e Digitalizzazione</h3>
+            <p>Nonostante le difficoltà legate alla pandemia, OPES Marche mantiene la propria attività grazie alla digitalizzazione dei servizi e all'innovazione nell'organizzazione sportiva.</p>
+          </div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-content">
+            <h3>350+ Società e 15.000 Atleti</h3>
+            <p>Oggi OPES Marche è uno dei comitati regionali più attivi d'Italia con oltre 350 società affiliate, 15.000 tesserati e più di 30 discipline sportive rappresentate su tutto il territorio regionale.</p>
+          </div>
+          <div class="timeline-dot">2025</div>
+          <div style="flex: 1;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IL CONSIGLIO -->
+  <section id="consiglio" style="background: var(--light-gray);">
+    <div class="container">
+      <div class="section-header centered fade-in">
+        <div class="section-label"><i class="fas fa-users"></i> Il Consiglio</div>
+        <h2 class="section-title">Organi <span>Direttivi</span></h2>
+        <p class="section-text">Il Comitato Regionale Marche è guidato da un consiglio eletto dalle società affiliate.</p>
+      </div>
+      <div class="consiglio-grid">
+        <div class="membro-card fade-in" style="border-top-color: var(--gold);">
+          <div class="membro-avatar" style="background: #fef9e7; color: var(--gold);"><i class="fas fa-crown"></i></div>
+          <h3>Ascani Vincenzo</h3>
+          <p class="ruolo" style="color:var(--gold); font-weight:700;">Presidente Regionale</p>
+          <p style="font-size: 13px; color: var(--dark-gray); font-weight:600; margin-top:4px;">Comitato Reg. Marche</p>
+          <p style="font-size: 13px; color: var(--gray); margin-top: 10px;">Guida e rappresenta il Comitato Regionale in tutte le sedi istituzionali.</p>
+          <a href="tel:+393299627016" style="font-size:13px; color:var(--primary-blue); margin-top:8px; display:block;"><i class="fas fa-phone"></i> 329 962 7016</a>
+        </div>
+        <div class="membro-card fade-in">
+          <div class="membro-avatar"><i class="fas fa-user-tie"></i></div>
+          <h3>Gagliardi Michele</h3>
+          <p class="ruolo" style="font-weight:700;">Vice Presidente Regionale</p>
+          <p style="font-size: 13px; color: var(--dark-gray); font-weight:600; margin-top:4px;">Vicepresidenza</p>
+          <p style="font-size: 13px; color: var(--gray); margin-top: 10px;">Supporta il Presidente e coordina le attività sportive e amministrative.</p>
+          <a href="tel:+393402114795" style="font-size:13px; color:var(--primary-blue); margin-top:8px; display:block;"><i class="fas fa-phone"></i> 340 211 4795</a>
+        </div>
+        <div class="membro-card fade-in" style="border-top-color: #2ecc71;">
+          <div class="membro-avatar" style="background: #eafaf1; color: #27ae60;"><i class="fas fa-handshake"></i></div>
+          <h3>Capitanelli Leonardo</h3>
+          <p class="ruolo" style="color:#27ae60; font-weight:700;">Consigliere</p>
+          <p style="font-size: 13px; color: var(--dark-gray); font-weight:600; margin-top:4px;">Terzo Settore</p>
+          <p style="font-size: 13px; color: var(--gray); margin-top: 10px;">Supporta il presidente ed il vice presidente nelle attività organizzative, eventi no profit, eventi sportivi e del terzo settore.</p>
+        </div>
+        <div class="membro-card fade-in">
+          <div class="membro-avatar" style="background: #eafaf1; color: var(--opes-green);"><i class="fas fa-trophy"></i></div>
+          <h3>Gagliardi Gianluca</h3>
+          <p class="ruolo" style="font-weight:700;">Responsabile Tecnico</p>
+          <p style="font-size: 13px; color: var(--dark-gray); font-weight:600; margin-top:4px;">Settore Tecnico</p>
+          <p style="font-size: 13px; color: var(--gray); margin-top: 10px;">Coordina i campionati, le gare e tutte le attività tecniche.</p>
+          <a href="tel:+393312875923" style="font-size:13px; color:var(--primary-blue); margin-top:8px; display:block;"><i class="fas fa-phone"></i> 331 287 5923</a>
+        </div>
+        <div class="membro-card fade-in">
+          <div class="membro-avatar" style="background: #fdedec; color: var(--opes-red);"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Pistoni Massimo</h3>
+          <p class="ruolo" style="font-weight:700;">Responsabile Formazione</p>
+          <p style="font-size: 13px; color: var(--dark-gray); font-weight:600; margin-top:4px;">Settore Formazione</p>
+          <p style="font-size: 13px; color: var(--gray); margin-top: 10px;">Gestisce i corsi di formazione per tecnici e dirigenti sportivi. Preparatore Fisico CONI, esperto atletica e preparazione psicofisica giovanile.</p>
+        </div>
+        <div class="membro-card fade-in">
+          <div class="membro-avatar" style="background: #eaf4fc; color: var(--accent-blue);"><i class="fas fa-bullhorn"></i></div>
+          <h3>Casagrande Alissa</h3>
+          <p class="ruolo" style="font-weight:700;">Resp. Comunicazione & Tesseramento</p>
+          <p style="font-size: 13px; color: var(--dark-gray); font-weight:600; margin-top:4px;">Segreteria & Tesseramento</p>
+          <p style="font-size: 13px; color: var(--gray); margin-top: 10px;">Gestisce la comunicazione istituzionale, i rapporti con i media e il tesseramento degli atleti.</p>
+          <a href="tel:+393402114793" style="font-size:13px; color:var(--primary-blue); margin-top:8px; display:block;"><i class="fas fa-phone"></i> 340 211 4793</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATUTO -->
+  <section id="statuto" style="background: var(--primary-blue); padding: 70px 0;">
+    <div class="container">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+        <div class="fade-in" style="color: white; max-width: 600px;">
+          <div class="section-label" style="background: rgba(255,255,255,0.15); color: white;"><i class="fas fa-file-alt"></i> Statuto & Regolamenti</div>
+          <h2 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 2rem; color: white; margin-bottom: 16px;">
+            Documenti Ufficiali
+          </h2>
+          <p style="color: rgba(255,255,255,0.8); line-height: 1.8;">
+            Consulta lo Statuto del Comitato Regionale Marche, il Regolamento Interno 
+            e i documenti ufficiali OPES. Tutti i documenti sono disponibili per 
+            le società affiliate e gli organi istituzionali.
+          </p>
+        </div>
+        <div class="fade-in" style="display: flex; flex-direction: column; gap: 14px;">
+          <a href="https://www.opesitalia.it/wp-content/uploads/2024/10/STATUTO-OPES-2024.pdf" target="_blank" class="btn-white"><i class="fas fa-file-pdf"></i> Statuto OPES Italia</a>
+          <a href="https://www.opesitalia.it" target="_blank" class="btn-white" style="background: transparent; color: white; border-color: rgba(255,255,255,0.5);"><i class="fas fa-globe"></i> Sito Nazionale OPES</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="italy-bar"><span></span><span></span><span></span></div>
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo-area">
+              <div class="footer-logo-text">OPES</div>
+              <div class="footer-logo-sub">Comitato Regionale Marche</div>
+            </div>
+            <p class="footer-desc">Ente di Promozione Sportiva riconosciuto dal CONI. Sport per tutti nelle Marche.</p>
+            <div class="footer-social">
+              <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Link Rapidi</h4>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="chi-siamo.html"><i class="fas fa-chevron-right"></i> Chi Siamo</a></li>
+              <li><a href="sport.html"><i class="fas fa-chevron-right"></i> Sport</a></li>
+              <li><a href="affiliazione.html"><i class="fas fa-chevron-right"></i> Affiliazione</a></li>
+              <li><a href="eventi.html"><i class="fas fa-chevron-right"></i> Eventi</a></li>
+              <li><a href="https://www.opesitalia.it/news/" target="_blank"><i class="fas fa-chevron-right"></i> News</a></li>
+              <li><a href="contatti.html"><i class="fas fa-chevron-right"></i> Contatti</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Sport</h4>
+            <ul class="footer-links">
+              <li><a href="sport.html#calcio"><i class="fas fa-chevron-right"></i> Calcio</a></li>
+              <li><a href="sport.html#basket"><i class="fas fa-chevron-right"></i> Basket</a></li>
+              <li><a href="sport.html#pallavolo"><i class="fas fa-chevron-right"></i> Pallavolo</a></li>
+              <li><a href="sport.html#nuoto"><i class="fas fa-chevron-right"></i> Nuoto</a></li>
+              <li><a href="sport.html#atletica"><i class="fas fa-chevron-right"></i> Atletica</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contatti</h4>
+            <div class="footer-contact-item">
+              <div class="icon"><i class="fas fa-envelope"></i></div>
+              <div class="text"><strong>Email</strong>opes.marche@gmail.com</div>
+            </div>
+            <div class="footer-contact-item">
+              <div class="icon"><i class="fas fa-globe"></i></div>
+              <div class="text"><strong>Web</strong><a href="https://www.opesitalia.it" target="_blank" style="color: var(--accent-blue);">www.opesitalia.it</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <p>© 2025 OPES - Comitato Regionale Marche. Ente riconosciuto CONI.</p>
+          <div class="footer-bottom-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contatti.html">Contatti</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" aria-label="Torna su"><i class="fas fa-arrow-up"></i></button>
+  <script src="js/main.js"></script>
+  <style>
+    @media (max-width: 768px) {
+      .values-wrap { grid-template-columns: 1fr 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .values-wrap { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</body>
+</html>
